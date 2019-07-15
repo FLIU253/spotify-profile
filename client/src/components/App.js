@@ -1,11 +1,22 @@
-import React from 'react';
+import React, {Component} from 'react';
+import {token} from '../spotify';
 
-function App() {
-  return (
-    <div>
-      YEET
-    </div>
-  );
+class App extends Component{
+  state = {
+    token: '',
+  };
+
+  componentDidMount() {
+    this.setState({ token });
+  }
+  render() {
+    const { token } = this.state;
+    return (
+      <div>
+        YEET {console.log(token)}
+      </div>
+    );
+  }
 }
 
 export default App;
