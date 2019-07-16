@@ -17,7 +17,7 @@ const keys = require('./keys');
 
 const client_id = keys.client_id;
 const client_secret = keys.client_secret;
-let redirect_uri = 'http://localhost:8888/callback';
+let redirect_uri = 'http://localhost:8000/callback';
 
 /**
  * Generates a random string containing numbers and letters
@@ -145,5 +145,5 @@ app.get('/refresh_token', function(req, res) {
   });
 });
 
-console.log('Listening on 8888');
-app.listen(8888);
+console.log('Listening on 8000');
+app.listen(8000);

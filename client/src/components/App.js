@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
 import { access_token } from '../spotify-api';
 
+import LoginScreen from './LoginScreen';
+import Profile from './Profile';
+
 class App extends Component{
 
   constructor(){
@@ -11,7 +14,7 @@ class App extends Component{
   render() {
     return (
       <div>
-        <a href="http://localhost:8888">login to Spotify</a>
+         {access_token ? <Profile /> : <LoginScreen />}
       </div>
     );
   }
