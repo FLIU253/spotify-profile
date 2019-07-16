@@ -1,7 +1,10 @@
 import React from 'react';
+import { Router } from '@reach/router';
+import Navbar from './Navbar';
+
 const Profile = () => (
     <div>
-        u hate to see it
+        <Navbar/>
     </div>
 );
 
