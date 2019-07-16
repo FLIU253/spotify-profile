@@ -26,4 +26,16 @@ const headers = {
  */
 export const getUser = () => axios.get('https://api.spotify.com/v1/me', { headers });
 
+export const getUserInfo = () =>  {
+  return axios.all([getUser()])
+  .then(
+    axios.spread((user) => {
+      return {
+        user: user.data
+      }
+    })
+  )
+
+}
+
 //all API calls will go here

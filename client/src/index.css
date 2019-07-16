@@ -17,6 +17,9 @@ body {
   padding: 0;
   width: 100%;
   max-width: 100%;
+  background-color: rgb(24, 24, 24);
+  color: rgb(255, 255, 255);
+  height: 100vh;
 }
 .active{
   color: rgb(255, 255, 255)!important;

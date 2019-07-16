@@ -13,7 +13,7 @@ class App extends Component{
 
   render() {
     return (
-      <div>
+      <div >
          {access_token ? <Profile /> : <LoginScreen />}
       </div>
     );
