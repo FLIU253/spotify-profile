@@ -37,7 +37,6 @@ export const getTopArtistsLong = () =>
 export const getTopTracksLong = () =>
   axios.get('https://api.spotify.com/v1/me/top/tracks?limit=50&time_range=long_term', { headers });
 
-
 export const getUserInfo = () => {
   return axios
     .all([getUser(), getFollowing(), getPlaylists(), getTopArtistsLong(), getTopTracksLong()])
@@ -54,4 +53,13 @@ export const getUserInfo = () => {
     );
 };
 
-//all API calls will go here
+
+//5 seed values may be provided in any combination of seed_artists, seed_tracks and seed_genres.
+export const getRecommendations = (artist_id, track_id) =>
+  axios.get(`https://api.spotify.com/v1/recommendations?limit=20&seed_artists=${artist_id}&seed_tracks=${track_id}`, { headers });
+
+export const getRandomTopArtistId =() => {
+   getTopArtistsLong().then((req,res) => {
+    console.log(req.data);
+  });
+}

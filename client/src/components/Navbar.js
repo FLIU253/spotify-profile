@@ -69,6 +69,11 @@ const Navbar = () => (
                 <div>Playlists</div>
             </NavLink>
           </MenuItem>
+          <MenuItem>
+            <NavLink to="generate">
+                <div>Generate</div>
+            </NavLink>
+          </MenuItem>
       </Menu>
     </Container>
 );

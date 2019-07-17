@@ -5,6 +5,7 @@ import User from './User';
 import TopArtist from './TopArtist';
 import TopTracks from './TopTracks';
 import Playlists from './Playlists';
+import GeneratePlaylist from './GeneratePlaylist';
 
 const Profile = () => (
     <div>
@@ -14,6 +15,7 @@ const Profile = () => (
             <TopArtist path = "/artists"/>
             <TopTracks path = "/tracks"/>
             <Playlists path = "/playlists"/>
+            <GeneratePlaylist path = "/generate"/>
         </Router>
     </div>
 );
