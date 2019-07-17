@@ -4,6 +4,7 @@ import Navbar from './Navbar';
 import User from './User';
 import TopArtist from './TopArtist';
 import TopTracks from './TopTracks';
+import Playlists from './Playlists';
 
 const Profile = () => (
     <div>
@@ -12,6 +13,7 @@ const Profile = () => (
             <User path = "/"/>
             <TopArtist path = "/artists"/>
             <TopTracks path = "/tracks"/>
+            <Playlists path = "/playlists"/>
         </Router>
     </div>
 );

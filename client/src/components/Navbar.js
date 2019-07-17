@@ -18,7 +18,7 @@ const Container = styled.nav`
 `
 const Menu = styled.ul`
     display: grid;
-    grid-template-rows: repeat(3, 5vh);
+    grid-template-rows: repeat(4, 5vh);
     padding-inline-start: 0px;
 `;
 
@@ -62,6 +62,11 @@ const Navbar = () => (
           <MenuItem>
             <NavLink to="tracks">
                 <div>Top Tracks</div>
+            </NavLink>
+          </MenuItem>
+          <MenuItem>
+            <NavLink to="playlists">
+                <div>Playlists</div>
             </NavLink>
           </MenuItem>
       </Menu>
