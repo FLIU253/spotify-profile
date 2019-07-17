@@ -6,6 +6,7 @@ const Main = styled.div`
     padding-left: 120px;
     padding-top: 120px;
     min-height: 100vh;
+    overflow-x:hidden;
 `;
 const Header = styled.header`
     display: flex;
@@ -34,7 +35,7 @@ const FollowInfo = styled.div`
 const Preview = styled.div`
     margin-top: 100px;
     display:grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 50% 50%;
     grid-column-gap: 20px;
     width: 100%;
     text-align:left;
@@ -63,6 +64,26 @@ const ProfilePic = styled.div`
         margin-right: 50px;
     }
 `;
+const AlbumCover = styled.div`
+text-align: left;
+margin-bottom: 25px;
+display: flex;
+height:50px;
+img{
+    width:50px;
+    height: 50px;
+    margin-right: 50px;
+}
+.song-name{
+    height: 22px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 48%;
+    margin-right: 10px;
+}
+`;
+
 class User extends Component{
     state = {
         user: null,
@@ -82,6 +103,12 @@ class User extends Component{
         console.log(user, followedArtists, playlists, topArtists, topTracks);
     }
     
+    millisToMinutesAndSeconds(millis) {
+        let minutes = Math.floor(millis / 60000);
+        let seconds = ((millis % 60000) / 1000).toFixed(0);
+        return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
+      }
+            
     render() {
         const { user, followedArtists, playlists, topArtists, topTracks } = this.state;
         const totalPlaylists = playlists ? playlists.total : 0;
@@ -143,7 +170,16 @@ class User extends Component{
                                     {topTracks ?(
                                         <ul>
                                             {topTracks.items.slice(0, 10).map((track,i) => (
-                                                <div  key={i}>{track.name}</div>
+                                                <div  key={i}>
+                                                <AlbumCover >
+                                                    <img src={track.album.images[2].url} alt="album cover"/>
+                                                    <span className = "song-name" key={i}>
+                                                    {track.name}
+                                                    <p>Testing here</p>
+                                                    </span>
+                                                    <p style = {{display: 'flex', height: '22px', margin: '0'}}>{this.millisToMinutesAndSeconds(track.duration_ms)}</p>
+                                                </AlbumCover>
+                                                </div>
                                             ))}
                                         </ul>
                                     ): null}
