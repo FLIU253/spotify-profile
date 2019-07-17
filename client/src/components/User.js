@@ -175,7 +175,6 @@ class User extends Component{
                                                     <img src={track.album.images[2].url} alt="album cover"/>
                                                     <span className = "song-name" key={i}>
                                                     {track.name}
-                                                    <p>Testing here</p>
                                                     </span>
                                                     <p style = {{display: 'flex', height: '22px', margin: '0'}}>{this.millisToMinutesAndSeconds(track.duration_ms)}</p>
                                                 </AlbumCover>
