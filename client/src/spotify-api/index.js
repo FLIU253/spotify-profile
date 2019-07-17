@@ -33,7 +33,7 @@ export const getPlaylists = () => axios.get('https://api.spotify.com/v1/me/playl
 
 export const getTopArtistsLong = () =>
   axios.get('https://api.spotify.com/v1/me/top/artists?limit=50&time_range=long_term', { headers });
-  
+
 export const getTopTracksLong = () =>
   axios.get('https://api.spotify.com/v1/me/top/tracks?limit=50&time_range=long_term', { headers });
 
