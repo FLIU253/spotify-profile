@@ -83,3 +83,5 @@ export const addTracksToPlaylist = (playlistId, uris) => {
   const url = `https://api.spotify.com/v1/playlists/${playlistId}/tracks?uris=${uris}`;
   return axios({ method: 'post', url, headers });
 };
+
+export const getAPlaylist = (playlistId) => axios.get(`https://api.spotify.com/v1/playlists/${playlistId}`, { headers });
