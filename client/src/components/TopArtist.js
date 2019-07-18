@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {getTopArtistsLong } from '../spotify-api';
 import styled from 'styled-components';
+import Loader from 'react-loader-spinner';
 
 const Main = styled.div`
     padding-left: 120px;
@@ -37,6 +38,7 @@ const Name = styled.p`
     text-align: center;
 
 `;
+
 class TopArtists extends Component {
     state = {
         topArtists: null,
@@ -56,7 +58,8 @@ class TopArtists extends Component {
         return(
            <Main>
                <Header>
-                   <h2>Top Artists</h2>
+                   <h2>Top Artists</h2> 
+                   {topArtists ? (null):   <Loader type="Puff" color="#00BFFF" height="500"	width="500" className = "loader"/> }
                </Header>
                <Artists>
                    {topArtists ? (
@@ -66,7 +69,7 @@ class TopArtists extends Component {
                                  <Name>{name}</Name>
                             </ArtistSection>
                           ))
-                   ) :null}
+                   ) :  null}
                </Artists>
            </Main>
         );

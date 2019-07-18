@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { getUserInfo } from '../spotify-api';
 import styled from 'styled-components';
+import Loader from 'react-loader-spinner';
 
 const Main = styled.div`
     padding-left: 120px;
