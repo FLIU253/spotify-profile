@@ -53,13 +53,33 @@ export const getUserInfo = () => {
     );
 };
 
+export const getRandTopTrackAndArtist = () => {
+  return axios.all([getTopArtistsLong(), getTopTracksLong()])
+  .then(
+    axios.spread((topArtists, topTracks) => {
+      const randArtistID = topArtists.data.items[Math.floor(Math.random() * topArtists.data.items.length)].id;
+      const randTracksID = topTracks.data.items[Math.floor(Math.random() * topTracks.data.items.length)].id;
+        return{
+          artistID: randArtistID,
+          trackID: randTracksID,
+        };
+    }),
+  );
+};
 
 //5 seed values may be provided in any combination of seed_artists, seed_tracks and seed_genres.
-export const getRecommendations = (artist_id, track_id) =>
-  axios.get(`https://api.spotify.com/v1/recommendations?limit=20&seed_artists=${artist_id}&seed_tracks=${track_id}`, { headers });
+export const getRecommendations = (artistID, trackID) =>{
+  return axios.get(`https://api.spotify.com/v1/recommendations?limit=20&seed_artists=${artistID}&seed_tracks=${trackID}`, { headers });
 
-export const getRandomTopArtistId =() => {
-   getTopArtistsLong().then((req,res) => {
-    console.log(req.data);
-  });
 }
+
+export const createPlaylist = (userId, name) => {
+  const url = `https://api.spotify.com/v1/users/${userId}/playlists`;
+  const data = JSON.stringify({ name });
+  return axios({ method: 'post', url, headers, data });
+}
+
+export const addTracksToPlaylist = (playlistId, uris) => {
+  const url = `https://api.spotify.com/v1/playlists/${playlistId}/tracks?uris=${uris}`;
+  return axios({ method: 'post', url, headers });
+};
