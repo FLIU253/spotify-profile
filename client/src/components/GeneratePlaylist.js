@@ -37,11 +37,35 @@ const GeneratedButton = styled.div`
 `;
 
 const PlayListInfo = styled.div`
-    display:grid;
-    grid-template-columns: 40% 60%;
+    margin-bottom: 50px;
     text-align: center;
-
+    img{
+        height: 250px;
+        width:250px;
+    }
 `;
+
+const Tracklist = styled.ul`
+    padding: 0px;
+    margin: 0px;
+    list-style: none;
+`;
+
+const Song = styled.li`
+ margin-bottom: 30px;
+`;
+
+const SongCover = styled.div`
+    display: grid;
+    grid-template-columns: 10% 80% 10%;
+    img{
+        width: 50px;
+        height: 50px;
+        vertical-align: middle;
+        margin-right: 20px;
+    }
+`;
+
 
 class GeneratePlaylist extends Component{
 
@@ -96,23 +120,53 @@ class GeneratePlaylist extends Component{
         this.getData();
     }
 
+    millisToMinutesAndSeconds(millis) {
+        let minutes = Math.floor(millis / 60000);
+        let seconds = ((millis % 60000) / 1000).toFixed(0);
+        return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
+    }
+            
+
     render(){
+        const {playlist} = this.state;
         return(
             <Main>
                 <Header>
                     <h3>Generate A Random Playlist Based on Your Top Artist and Tracks Here!</h3>
                     <GeneratedButton onClick = {this.handleClick}>Generate!</GeneratedButton>
                 </Header>
-              {this.playlist ? (
-                    <PlayListInfo>
-                        <div>
-                            <img src={this.playlist.images[1].url} alt="playlist cover"/>
-                            <h4>{this.playlist.name}</h4>
-                        </div>
-                        <div>
-                            TESTING TESTING
-                        </div>
-                    </PlayListInfo>
+              {playlist ? (
+              <div style ={{marginLeft: '50px'}}>
+                <PlayListInfo>
+                    <h3>Playlist Generated!</h3>
+                    <img src={playlist.images[1].url} alt=""/>
+                    <h4>{playlist.name}</h4>
+                </PlayListInfo> 
+                <Tracklist>
+                    {playlist.tracks.items.map((track, i) => (
+                        <Song key = {i}>
+                            <SongCover>
+                            <img src={track.track.album.images[2].url} alt="song cover"/>
+                            <div>
+                            <span>{track.track.name}</span>
+                            <div style = {{textOverflow:'ellipsis', whiteSpace: 'nowrap', overflow:'hidden'}}>{track.track.artists.map((artist,i) => (
+                                    <span key = {i}>
+                                    {artist.name}
+                                    {track.track.artists.length > 0 && i === track.track.artists.length - 1 ? '' : ','}&nbsp;
+                                    </span>
+                                ))}
+                                    <span> 
+                                    &nbsp;&middot;&nbsp;&nbsp;
+                                    {track.track.album.name}
+                                    </span>
+                                </div>
+                            </div>
+                            <p>{this.millisToMinutesAndSeconds(track.track.duration_ms)}</p>
+                            </SongCover>
+                        </Song>
+                    ))}
+                </Tracklist>
+              </div>
               ) : null}
             </Main>
         );
