@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {getTopTracksLong } from '../spotify-api';
 import styled from 'styled-components';
+import Loader from 'react-loader-spinner';
 
 const Main = styled.div`
     padding-left: 160px;
@@ -66,6 +67,7 @@ class TopTracks extends Component {
             <Main>
                 <Header>
                     <h2>Top Tracks of All Time</h2>
+                    {topTracks ? (null):   <Loader type="Puff" color="#00BFFF" height="500"	width="500" className = "loader"/> }
                 </Header>
                 <Tracklist>
                     {topTracks ? (

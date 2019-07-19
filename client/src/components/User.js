@@ -188,7 +188,11 @@ class User extends Component{
                           </List>
                         </Preview>
                     </Main>
-                ): null}
+                ):  <Main>
+                     <Header>
+                    <Loader type="Puff" color="#00BFFF" height="500"	width="500" className = "loader"/>
+                    </Header>
+                     </Main>}
             </Fragment>
         )
     }

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { getPlaylists } from '../spotify-api';
 import styled from 'styled-components';
+import Loader from 'react-loader-spinner';
 
 const Main = styled.div`
     padding-left: 120px;
@@ -51,6 +52,7 @@ class Playlists extends Component {
             <Main>
                 <Header>
                     <h2>Your Playlists</h2>
+                    {playlists ? (null):   <Loader type="Puff" color="#00BFFF" height="500"	width="500" className = "loader"/> }
                 </Header>
                 <PlaylistsList>
                 {playlists ? (
