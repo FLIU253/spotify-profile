@@ -6,6 +6,7 @@
  * For more information, read
  * https://developer.spotify.com/web-api/authorization-guide/#authorization_code_flow
  */
+require('dotenv').config();
 
 var express = require('express'); // Express web server framework
 var request = require('request'); // "Request" library
@@ -17,7 +18,7 @@ const keys = require('./keys');
 
 
 const client_id = keys.client_id || process.env.client_id;
-const client_secret = keys.client_secret || client_secret;
+const client_secret = keys.client_secret || process.env.client_secret;
 let redirect_uri = 'http://localhost:8000/callback' || process.env.redirect_uri;
 let frontend_uri = process.env.frontend_uri || 'http://localhost:3000';
 const port = process.env.port || 8000;
