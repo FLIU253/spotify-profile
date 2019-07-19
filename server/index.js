@@ -12,12 +12,20 @@ var request = require('request'); // "Request" library
 var cors = require('cors');
 var querystring = require('querystring');
 var cookieParser = require('cookie-parser');
+var path = require('path');
 const keys = require('./keys'); 
 
 
-const client_id = keys.client_id;
-const client_secret = keys.client_secret;
-let redirect_uri = 'http://localhost:8000/callback';
+const client_id = keys.client_id || process.env.client_id;
+const client_secret = keys.client_secret || client_secret;
+let redirect_uri = 'http://localhost:8000/callback' || process.env.redirect_uri;
+let frontend_uri = process.env.frontend_uri || 'http://localhost:3000';
+const port = process.env.port || 8000;
+
+if (process.env.NODE_ENV !== 'production') {
+  redirect_uri = 'http://localhost:8000/callback';
+  frontend_uri = 'http://localhost:3000';
+}
 
 /**
  * Generates a random string containing numbers and letters
@@ -37,6 +45,13 @@ var generateRandomString = function(length) {
 var stateKey = 'spotify_auth_state';
 
 var app = express();
+
+// app.use(express.static(path.join(__dirname, "../client/build")));
+// /*React root*/
+// app.get("*", (req, res) => {
+// res.sendFile(path.join(__dirname + "../client/build/index.html"));
+// });
+
 
 app.use(express.static(__dirname + '/public'))
    .use(cors())
@@ -145,5 +160,6 @@ app.get('/refresh_token', function(req, res) {
   });
 });
 
-console.log('Listening on 8000');
-app.listen(8000);
+app.listen(port, function() {
+  console.log(`Node cluster worker ${process.pid}: listening on port ${port}`);
+});
