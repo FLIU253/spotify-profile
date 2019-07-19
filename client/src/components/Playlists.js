@@ -38,12 +38,26 @@ class Playlists extends Component {
     };
 
     componentDidMount(){
-        this.getData();
+        if(localStorage.spotify_access_token)
+        {
+            this.getData();
+        }else{
+            console.log(Date.now());
+        }
     }
+
     async getData(){
-        const {data} = await getPlaylists();
-        this.setState({playlists: data});
-        console.log(data);
+        if(!localStorage.playlists){
+            const {data} = await getPlaylists();
+            this.setState({playlists: data});
+            console.log(data);
+            localStorage.setItem("playlists", JSON.stringify(data));
+        }else{
+            console.log("using stored tokens");
+            this.setState({
+                playlists: JSON.parse(localStorage.playlists)
+            });
+        }
     }
     render() {
         const { playlists } = this.state;

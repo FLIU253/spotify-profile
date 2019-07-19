@@ -45,13 +45,26 @@ class TopTracks extends Component {
         topTracks: null
     };
     componentDidMount(){
-        this.getData();
+        if(localStorage.spotify_access_token)
+        {
+            this.getData();
+        }else{
+            console.log(Date.now());
+        }
     }
 
     async getData() {
-        const {data} = await getTopTracksLong();
-        this.setState({topTracks: data});
-        console.log(data);
+        if(!localStorage.topTracks){
+            const {data} = await getTopTracksLong();
+            this.setState({topTracks: data});
+            console.log(data);
+            localStorage.setItem("topTracks", JSON.stringify(data));
+        }else{
+            console.log("using stored tokens");
+            this.setState({
+                topTracks: JSON.parse(localStorage.topTracks)
+            });
+        }
     }
 
     millisToMinutesAndSeconds(millis) {

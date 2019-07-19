@@ -95,13 +95,34 @@ class User extends Component{
     }
     
     componentDidMount(){
-        this.getData();
+        if(localStorage.spotify_access_token)
+        {
+            this.getData();
+        }else{
+            console.log(Date.now());
+        }
     }
 
     async getData() {
-        const { user, followedArtists, playlists, topArtists, topTracks} = await getUserInfo();
-        this.setState({  user, followedArtists, playlists, topArtists, topTracks });
-        console.log(user, followedArtists, playlists, topArtists, topTracks);
+        if(!localStorage.user && !localStorage.followedArtists && !localStorage.playlists && !localStorage.topArtists && !localStorage.topTracks){
+            const { user, followedArtists, playlists, topArtists, topTracks} = await getUserInfo();
+            this.setState({  user, followedArtists, playlists, topArtists, topTracks });
+            console.log(user, followedArtists, playlists, topArtists, topTracks);
+            localStorage.setItem("user", JSON.stringify(user));
+            localStorage.setItem("followedArtists", JSON.stringify(followedArtists));
+            localStorage.setItem("playlists", JSON.stringify(playlists));
+            localStorage.setItem("topArtists", JSON.stringify(topArtists));
+            localStorage.setItem("topTracks", JSON.stringify(topTracks));
+        }else{
+            console.log("using stored tokens");
+            this.setState({
+                user: JSON.parse(localStorage.user),
+                followedArtists: JSON.parse(localStorage.followedArtists),
+                playlists:JSON.parse( localStorage.playlists),
+                topArtists: JSON.parse(localStorage.topArtists),
+                topTracks: JSON.parse(localStorage.topTracks),
+            });
+        }
     }
     
     millisToMinutesAndSeconds(millis) {

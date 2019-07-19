@@ -78,7 +78,9 @@ class GeneratePlaylist extends Component{
     };
 
     componentDidMount(){
-        //this.getData();
+        if(localStorage.randomPlaylist){
+            this.setState({playlist: JSON.parse(localStorage.randomPlaylist)});
+        }
     }
 
     async getData(){
@@ -107,7 +109,8 @@ class GeneratePlaylist extends Component{
                 const {data} = await addTracksToPlaylist(playlistId, uris);
                 if(data){
                     const {data} = await getAPlaylist(playlistId);
-                    this.setState({playlist: data});
+                    localStorage.setItem('randomPlaylist', JSON.stringify(data));
+                    this.setState({playlist: JSON.parse(localStorage.randomPlaylist)});
                     console.log(data);
                 }
             }

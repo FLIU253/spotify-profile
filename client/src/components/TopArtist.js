@@ -44,13 +44,26 @@ class TopArtists extends Component {
         topArtists: null,
     };
     componentDidMount(){
-        this.getData();
+        if(localStorage.spotify_access_token)
+        {
+            this.getData();
+        }else{
+            console.log(Date.now());
+        }
     }
 
     async getData(){
-        const {data} = await getTopArtistsLong();
-        this.setState({ topArtists: data });
-        console.log(data);
+        if(!localStorage.topArtists){
+            const {data} = await getTopArtistsLong();
+            this.setState({ topArtists: data });
+            console.log(data);
+            localStorage.setItem("topArtists", JSON.stringify(data));
+        }else{
+            console.log("using stored tokens");
+            this.setState({
+                topArtists: JSON.parse(localStorage.topArtists)
+            });
+        }
     }
 
     render(){
