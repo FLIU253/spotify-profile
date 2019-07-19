@@ -8,6 +8,9 @@ yarn-error.log*
 #keys
 keys.js
 
+#production json
+production.json
+
 # Runtime data
 pids
 *.pid
