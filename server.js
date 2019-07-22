@@ -17,8 +17,8 @@ var path = require('path');
 
 const client_id = process.env.client_id;
 const client_secret = process.env.client_secret;
-let redirect_uri = 'http://localhost:8000/callback' || process.env.redirect_uri;
-let frontend_uri = process.env.frontend_uri || 'http://localhost:3000';
+let redirect_uri =  process.env.redirect_uri;
+let frontend_uri = process.env.frontend_uri;
 const PORT = process.env.PORT || 8000;
 
 if (process.env.NODE_ENV !== 'production') {
