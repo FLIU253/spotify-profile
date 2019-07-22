@@ -16,7 +16,6 @@ var cookieParser = require('cookie-parser');
 var path = require('path');
 const keys = require('./keys'); 
 
-
 const client_id = keys.client_id || process.env.client_id;
 const client_secret = keys.client_secret || process.env.client_secret;
 let redirect_uri = 'http://localhost:8000/callback' || process.env.redirect_uri;
@@ -158,7 +157,7 @@ app.get('/refresh_token', function(req, res) {
 if(process.env.NODE_ENV === "production"){
   app.use(express.static('client/build'));
   app.get('*', (req, res)=> {
-    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+    res.sendFile(path.resolve(__dirname, 'client/public', 'build', 'index.html'));
   })
 }
 
