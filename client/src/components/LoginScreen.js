@@ -5,7 +5,7 @@ import styled from 'styled-components';
 const login_uri =
   process.env.NODE_ENV !== 'production'
     ? 'http://localhost:8888/login'
-    : 'https://spotify-profile.herokuapp.com/login';
+    : 'https://agile-shore-54953.herokuapp.com/login';
 
 
 const Login = styled.div`
